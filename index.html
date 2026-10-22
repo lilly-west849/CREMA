@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#fff8f2">
+  <meta name="description" content="Eiscreme, die den Sommer ein bisschen schöner macht. Entdecke unsere Sorten und unsere Welt voller Farbe.">
+  <title>CREMA — Ein Löffel Sommer</title>
+  <style>
+    :root {
+      --cream: #fff8f2;
+      --pink: #f4a6b8;
+      --coral: #ef735f;
+      --orange: #ffb15c;
+      --ink: #25211f;
+      --muted: #716762;
+      --green: #c9d9b6;
+      --line: rgba(37,33,31,.13);
+      --radius: 26px;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0; background: var(--cream); color: var(--ink);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+    a { color: inherit; text-decoration: none; }
+    button { font: inherit; }
+    .announcement {
+      background: var(--ink); color: #fff8f2; text-align: center;
+      padding: 10px 16px; font-size: .76rem; letter-spacing: .09em;
+    }
+    header {
+      position: sticky; top: 0; z-index: 10; background: rgba(255,248,242,.88);
+      backdrop-filter: blur(14px); border-bottom: 1px solid var(--line);
+    }
+    .nav {
+      max-width: 1240px; margin: auto; padding: 19px 5.5%;
+      display: flex; align-items: center; justify-content: space-between; gap: 24px;
+    }
+    .logo { font-weight: 950; letter-spacing: -.09em; font-size: 1.65rem; }
+    .logo span { color: var(--coral); }
+    .nav-links { display: flex; gap: clamp(16px, 3vw, 38px); align-items: center; font-size: .9rem; }
+    .nav-links a:not(.nav-cta) { color: #5f5651; transition: color .2s; }
+    .nav-links a:hover { color: var(--coral); }
+    .nav-cta, .button {
+      display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+      border: 0; border-radius: 999px; padding: 13px 20px; background: var(--ink);
+      color: white; font-weight: 700; font-size: .9rem; transition: transform .2s, background .2s;
+    }
+    .nav-cta:hover, .button:hover { transform: translateY(-2px); background: var(--coral); }
+    .menu-toggle { display: none; border: 1px solid var(--line); background: transparent; border-radius: 50%; width: 44px; height: 44px; font-size: 1.2rem; }
+    main { overflow: hidden; }
+    .hero {
+      max-width: 1240px; margin: auto; padding: 68px 5.5% 88px;
+      display: grid; grid-template-columns: 1.02fr .98fr; align-items: center; gap: clamp(32px, 6vw, 84px);
+    }
+    .eyebrow { display: inline-flex; align-items: center; gap: 9px; font-size: .75rem; font-weight: 800; letter-spacing: .15em; text-transform: uppercase; color: var(--coral); }
+    .eyebrow:before { content: ""; width: 26px; height: 2px; background: currentColor; }
+    h1 { font-size: clamp(3.5rem, 7.5vw, 7.2rem); line-height: .91; letter-spacing: -.085em; margin: 22px 0 24px; font-weight: 900; max-width: 700px; }
+    h1 em { font-family: Georgia, serif; font-weight: 500; color: var(--coral); letter-spacing: -.09em; }
+    .hero-copy { color: var(--muted); font-size: 1.08rem; line-height: 1.75; max-width: 460px; }
+    .hero-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 22px; margin-top: 30px; }
+    .text-link { font-weight: 750; font-size: .92rem; border-bottom: 1px solid var(--ink); padding-bottom: 5px; }
+    .hero-note { margin-top: 44px; display: flex; align-items: center; gap: 14px; color: var(--muted); font-size: .8rem; }
+    .avatars { display: flex; }
+    .avatar { width: 30px; height: 30px; display: grid; place-items: center; border: 2px solid var(--cream); border-radius: 50%; margin-left: -7px; background: var(--pink); font-size: .85rem; }
+    .avatar:first-child { margin-left: 0; background: var(--green); }
+    .avatar:nth-child(3) { background: var(--orange); }
+    .hero-art { position: relative; min-width: 0; }
+    .poster-frame {
+      position: relative; z-index: 1; overflow: hidden; border-radius: 48% 48% 28px 28px;
+      background: #f6c5cf; transform: rotate(2deg); box-shadow: 0 28px 70px rgba(105,65,50,.15);
+    }
+    .poster-frame img { width: 100%; display: block; height: clamp(390px, 49vw, 620px); object-fit: cover; object-position: center; }
+    .sticker {
+      position: absolute; z-index: 2; right: -18px; top: 13%; width: 112px; height: 112px;
+      border-radius: 50%; display: grid; place-items: center; text-align: center; padding: 15px;
+      background: var(--orange); color: var(--ink); font-size: .78rem; line-height: 1.15; font-weight: 900;
+      transform: rotate(11deg); box-shadow: 0 12px 30px #d88e5640;
+    }
+    .sparkle { position: absolute; color: var(--coral); font-size: 3rem; z-index: 2; left: -25px; bottom: 12%; transform: rotate(-15deg); }
+    .marquee { background: var(--pink); overflow: hidden; padding: 18px 0; transform: rotate(-1.5deg) scale(1.03); }
+    .marquee-track { display: flex; width: max-content; gap: 28px; animation: slide 28s linear infinite; font-size: clamp(1rem, 2vw, 1.4rem); font-weight: 900; letter-spacing: -.04em; }
+    .marquee-track span { white-space: nowrap; }
+    .marquee-track b { color: var(--coral); }
+    @keyframes slide { to { transform: translateX(-50%); } }
+    section.content-section { max-width: 1240px; margin: auto; padding: 110px 5.5%; }
+    .section-head { display: flex; align-items: end; justify-content: space-between; gap: 28px; margin-bottom: 38px; }
+    h2 { font-size: clamp(2.4rem, 5vw, 4.7rem); letter-spacing: -.075em; line-height: .98; margin: 14px 0 0; }
+    .section-intro { max-width: 350px; color: var(--muted); line-height: 1.7; margin: 0 0 5px; }
+    .flavors { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+    .flavor-card { border-radius: var(--radius); overflow: hidden; padding: 26px; min-height: 280px; display: flex; flex-direction: column; justify-content: space-between; transition: transform .25s; }
+    .flavor-card:hover { transform: translateY(-6px); }
+    .flavor-card:nth-child(1) { background: #f4c3ce; }
+    .flavor-card:nth-child(2) { background: #d7e2c7; }
+    .flavor-card:nth-child(3) { background: #ffd29b; }
+    .flavor-top { display: flex; justify-content: space-between; align-items: center; font-size: .78rem; font-weight: 800; text-transform: uppercase; letter-spacing: .08em; }
+    .flavor-emoji { font-size: clamp(4.5rem, 8vw, 7rem); text-align: center; filter: drop-shadow(0 12px 9px #6b3c2820); transition: transform .25s; }
+    .flavor-card:hover .flavor-emoji { transform: rotate(-8deg) scale(1.08); }
+    .flavor-card h3 { font-size: 1.65rem; letter-spacing: -.05em; margin: 0 0 5px; }
+    .flavor-card p { color: #554942; margin: 0; font-size: .9rem; }
+    .story {
+      background: var(--ink); color: var(--cream); border-radius: 34px; display: grid;
+      grid-template-columns: 1fr 1fr; overflow: hidden; margin: 0 5.5%;
+    }
+    .story-copy { padding: clamp(32px, 6vw, 78px); align-self: center; }
+    .story-copy .eyebrow { color: var(--orange); }
+    .story-copy h2 { max-width: 520px; }
+    .story-copy p { color: #d0c4bd; line-height: 1.8; max-width: 460px; }
+    .story .button { background: var(--cream); color: var(--ink); margin-top: 14px; }
+    .story .button:hover { background: var(--orange); }
+    .story-visual { background: var(--green); min-height: 390px; display: grid; place-items: center; position: relative; overflow: hidden; }
+    .big-scoop { font-size: clamp(9rem, 20vw, 17rem); transform: rotate(-13deg); filter: drop-shadow(0 24px 14px #31412c25); }
+    .orbit { position: absolute; width: 75%; aspect-ratio: 1; border: 1px solid #25211f55; border-radius: 50%; transform: rotate(-25deg); }
+    .orbit:after { content: "MADE WITH LOVE"; position: absolute; top: 8%; right: 2%; font-size: .7rem; font-weight: 900; letter-spacing: .15em; color: var(--ink); }
+    .newsletter { text-align: center; padding-top: 115px !important; padding-bottom: 120px !important; }
+    .newsletter h2 { max-width: 700px; margin: 18px auto; }
+    .newsletter p { color: var(--muted); line-height: 1.7; }
+    .signup { display: flex; max-width: 460px; margin: 28px auto 0; padding: 6px; border: 1px solid var(--line); background: white; border-radius: 999px; gap: 8px; }
+    .signup input { min-width: 0; flex: 1; border: 0; outline: 0; background: transparent; padding: 12px 15px; font: inherit; }
+    .signup button { cursor: pointer; }
+    #form-message { min-height: 1.4em; font-size: .85rem; }
+    footer { background: #f1e7de; padding: 45px 5.5% 25px; }
+    .footer-main { max-width: 1240px; margin: auto; display: flex; justify-content: space-between; align-items: start; gap: 35px; padding-bottom: 40px; }
+    .footer-brand p { color: var(--muted); max-width: 270px; line-height: 1.65; font-size: .9rem; }
+    .footer-links { display: flex; flex-wrap: wrap; gap: 22px; font-size: .88rem; font-weight: 650; }
+    .footer-bottom { max-width: 1240px; margin: auto; border-top: 1px solid var(--line); padding-top: 20px; display: flex; justify-content: space-between; gap: 16px; color: var(--muted); font-size: .76rem; }
+    .socials { display: flex; gap: 16px; }
+    @media (max-width: 760px) {
+      .nav { padding: 15px 5%; }
+      .menu-toggle { display: block; }
+      .nav-links { display: none; position: absolute; top: 100%; left: 0; right: 0; padding: 20px 5% 26px; background: var(--cream); border-bottom: 1px solid var(--line); flex-direction: column; align-items: stretch; }
+      .nav-links.open { display: flex; }
+      .nav-links a { padding: 8px 0; }
+      .nav-cta { text-align: center; }
+      .hero { grid-template-columns: 1fr; padding-top: 54px; gap: 45px; }
+      h1 { font-size: clamp(3.5rem, 16vw, 6rem); }
+      .hero-art { width: 90%; margin: auto; }
+      .poster-frame img { height: min(115vw, 570px); }
+      .sticker { right: -15px; width: 92px; height: 92px; font-size: .68rem; }
+      .section-head { display: block; }
+      .section-intro { margin-top: 20px; }
+      .flavors { grid-template-columns: 1fr; }
+      .flavor-card { min-height: 240px; }
+      .story { grid-template-columns: 1fr; margin: 0 4%; }
+      .story-visual { min-height: 280px; }
+      .footer-main, .footer-bottom { flex-direction: column; }
+      .footer-links { gap: 16px; }
+      section.content-section { padding-top: 80px; padding-bottom: 80px; }
+      .newsletter { padding-top: 85px !important; padding-bottom: 90px !important; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; transition-duration: .01ms !important; }
+    }
+  </style>
+</head>
+<body>
+  <div class="announcement">GUTE LAUNE GIBT’S JETZT AUCH IM BECHER ✳︎</div>
+  <header>
+    <nav class="nav" aria-label="Hauptnavigation">
+      <a class="logo" href="#start" aria-label="CREMA Startseite">CREMA<span>.</span></a>
+      <button class="menu-toggle" aria-label="Menü öffnen" aria-expanded="false" id="menu-toggle">☰</button>
+      <div class="nav-links" id="nav-links">
+        <a href="#sorten">Unsere Sorten</a>
+        <a href="#story">Unsere Story</a>
+        <a href="#newsletter">Kontakt</a>
+        <a class="nav-cta" href="#sorten">Eis entdecken <span>↗</span></a>
+      </div>
+    </nav>
+  </header>
+
+  <main id="start">
+    <section class="hero">
+      <div class="hero-text">
+        <span class="eyebrow">Kleine Kugel, großes Glück</span>
+        <h1>Ein Löffel<br>voll <em>Sommer.</em></h1>
+        <p class="hero-copy">Für Sonnenstrahlen im Gesicht, klebrige Finger und diesen einen Moment, in dem die Welt einfach richtig gut schmeckt.</p>
+        <div class="hero-actions">
+          <a class="button" href="#sorten">Unsere Sorten entdecken <span>↗</span></a>
+          <a class="text-link" href="#story">Was uns besonders macht</a>
+        </div>
+        <div class="hero-note">
+          <div class="avatars" aria-hidden="true"><span class="avatar">🍓</span><span class="avatar">🍦</span><span class="avatar">🍒</span></div>
+          <span>Mit Liebe gemacht. Für schöne Momente gedacht.</span>
+        </div>
+      </div>
+      <div class="hero-art">
+        <div class="poster-frame"><img src="assets/poster-eiscreme.png" alt="Das originale Eiscreme-Poster als Key Visual der Website"></div>
+        <div class="sticker">100 %<br>GUTE<br>LAUNE ✳</div>
+        <div class="sparkle" aria-hidden="true">✳</div>
+      </div>
+    </section>
+
+    <div class="marquee" aria-label="Eis mit Liebe gemacht">
+      <div class="marquee-track" aria-hidden="true">
+        <span>MEHR LIEBE</span><b>✳</b><span>MEHR EIS</span><b>✳</b><span>MEHR SOMMER</span><b>✳</b><span>MEHR LIEBE</span><b>✳</b><span>MEHR EIS</span><b>✳</b><span>MEHR SOMMER</span><b>✳</b>
+        <span>MEHR LIEBE</span><b>✳</b><span>MEHR EIS</span><b>✳</b><span>MEHR SOMMER</span><b>✳</b><span>MEHR LIEBE</span><b>✳</b><span>MEHR EIS</span><b>✳</b><span>MEHR SOMMER</span><b>✳</b>
+      </div>
+    </div>
+
+    <section class="content-section" id="sorten">
+      <div class="section-head">
+        <div><span class="eyebrow">Dein neues Lieblingseis</span><h2>Welche Kugel<br>bist du heute?</h2></div>
+        <p class="section-intro">Fruchtig, cremig oder schokoladig – das Leben ist zu kurz für langweiliges Eis. Such dir deinen Vibe aus.</p>
+      </div>
+      <div class="flavors">
+        <article class="flavor-card">
+          <div class="flavor-top"><span>01 / Fruchtig</span><span>♡</span></div>
+          <div class="flavor-emoji" aria-hidden="true">🍓</div>
+          <div><h3>Berry Blush</h3><p>Beerig, frisch und ein kleines bisschen frech.</p></div>
+        </article>
+        <article class="flavor-card">
+          <div class="flavor-top"><span>02 / Cremig</span><span>♡</span></div>
+          <div class="flavor-emoji" aria-hidden="true">🍦</div>
+          <div><h3>Vanilla Dream</h3><p>Der zeitlose Klassiker mit Cozy-Gefühl.</p></div>
+        </article>
+        <article class="flavor-card">
+          <div class="flavor-top"><span>03 / Schokoladig</span><span>♡</span></div>
+          <div class="flavor-emoji" aria-hidden="true">🍫</div>
+          <div><h3>Choco Crush</h3><p>Intensiv, schokoladig und zum Dahinschmelzen.</p></div>
+        </article>
+      </div>
+    </section>
+
+    <section class="story" id="story">
+      <div class="story-copy">
+        <span class="eyebrow">Ein bisschen anders</span>
+        <h2>Wir nehmen Eis. Nicht das Leben.</h2>
+        <p>Wir glauben an kleine Freuden, große Geschmacksmomente und daran, dass ein guter Tag manchmal einfach mit einer Kugel Eis beginnt. CREMA ist eine Design-Konzeptmarke – bunt, optimistisch und immer bereit für den nächsten Sommermoment.</p>
+        <a class="button" href="#newsletter">Sag Hallo <span>↗</span></a>
+      </div>
+      <div class="story-visual" aria-hidden="true">
+        <div class="orbit"></div><div class="big-scoop">🍨</div>
+      </div>
+    </section>
+
+    <section class="content-section newsletter" id="newsletter">
+      <span class="eyebrow">Post von der Sonnenseite</span>
+      <h2>Gute Vibes direkt in dein Postfach.</h2>
+      <p>Neue Sorten, kleine Überraschungen und ganz viel Eis-Liebe. Versprochen: nur die guten Sachen.</p>
+      <form class="signup" id="signup-form">
+        <input type="email" name="email" placeholder="Deine E-Mail-Adresse" aria-label="Deine E-Mail-Adresse" required>
+        <button class="button" type="submit">Bin dabei ↗</button>
+      </form>
+      <p id="form-message" role="status"></p>
+    </section>
+  </main>
+
+  <footer>
+    <div class="footer-main">
+      <div class="footer-brand">
+        <a class="logo" href="#start">CREMA<span>.</span></a>
+        <p>Ein Löffel Sommer. Eine Prise Leichtigkeit. Und immer Platz für Nachtisch.</p>
+      </div>
+      <nav class="footer-links" aria-label="Footer Navigation">
+        <a href="#sorten">Sorten</a><a href="#story">Über uns</a><a href="#newsletter">Kontakt</a><a href="#impressum">Impressum</a><a href="#datenschutz">Datenschutz</a>
+      </nav>
+    </div>
+    <div class="footer-bottom">
+      <span>© <span id="year"></span> CREMA Studio. Mit Liebe gemacht.</span>
+      <div class="socials"><a href="#instagram" aria-label="Instagram">Instagram ↗</a><a href="#tiktok" aria-label="TikTok">TikTok ↗</a></div>
+      <span>Made for sunny days ☼</span>
+    </div>
+  </footer>
+  <script>
+    const menuToggle = document.getElementById('menu-toggle');
+    const navLinks = document.getElementById('nav-links');
+    menuToggle.addEventListener('click', () => {
+      const open = navLinks.classList.toggle('open');
+      menuToggle.setAttribute('aria-expanded', String(open));
+      menuToggle.setAttribute('aria-label', open ? 'Menü schließen' : 'Menü öffnen');
+      menuToggle.textContent = open ? '×' : '☰';
+    });
+    navLinks.querySelectorAll('a').forEach(link => link.addEventListener('click', () => {
+      navLinks.classList.remove('open');
+      menuToggle.setAttribute('aria-expanded', 'false');
+      menuToggle.textContent = '☰';
+    }));
+    document.getElementById('year').textContent = new Date().getFullYear();
+    document.getElementById('signup-form').addEventListener('submit', event => {
+      event.preventDefault();
+      document.getElementById('form-message').textContent = 'Danke! Das Formular ist ein Demo – hier kannst du später deinen Newsletter-Dienst verbinden.';
+      event.target.reset();
+    });
+  </script>
+</body>
+</html>
