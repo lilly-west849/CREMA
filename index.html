@@ -4,6 +4,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="theme-color" content="#fff8f2">
+  <!-- Bild: poster-eiscreme.png muss im Ordner "assets" neben dieser HTML-Datei liegen.
+       Alternativ kann unten im img-src eine öffentlich erreichbare Bild-URL eingesetzt werden. -->
   <meta name="description" content="Eiscreme, die den Sommer ein bisschen schöner macht. Entdecke unsere Sorten und unsere Welt voller Farbe.">
   <title>CREMA — Ein Löffel Sommer</title>
   <style>
@@ -57,7 +59,19 @@
     }
     .eyebrow { display: inline-flex; align-items: center; gap: 9px; font-size: .75rem; font-weight: 800; letter-spacing: .15em; text-transform: uppercase; color: var(--coral); }
     .eyebrow:before { content: ""; width: 26px; height: 2px; background: currentColor; }
-    h1 { font-size: clamp(3.5rem, 7.5vw, 7.2rem); line-height: .91; letter-spacing: -.085em; margin: 22px 0 24px; font-weight: 900; max-width: 700px; }
+    h1 {
+      font-size: clamp(2.8rem, 6.4vw, 6.4rem);
+      line-height: .98;
+      letter-spacing: -.065em;
+      margin: 22px 0 24px;
+      font-weight: 900;
+      max-width: 100%;
+      overflow-wrap: normal;
+      word-break: normal;
+      hyphens: none;
+    }
+    h1 .headline-line { display: block; }
+    h1 em { display: inline-block; }
     h1 em { font-family: Georgia, serif; font-weight: 500; color: var(--coral); letter-spacing: -.09em; }
     .hero-copy { color: var(--muted); font-size: 1.08rem; line-height: 1.75; max-width: 460px; }
     .hero-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 22px; margin-top: 30px; }
@@ -135,7 +149,8 @@
       .nav-links a { padding: 8px 0; }
       .nav-cta { text-align: center; }
       .hero { grid-template-columns: 1fr; padding-top: 54px; gap: 45px; }
-      h1 { font-size: clamp(3.5rem, 16vw, 6rem); }
+      h1 { font-size: clamp(2.65rem, 12.5vw, 4.7rem); line-height: 1; letter-spacing: -.055em; }
+      h1 .headline-line { white-space: nowrap; }
       .hero-art { width: 90%; margin: auto; }
       .poster-frame img { height: min(115vw, 570px); }
       .sticker { right: -15px; width: 92px; height: 92px; font-size: .68rem; }
@@ -174,7 +189,7 @@
     <section class="hero">
       <div class="hero-text">
         <span class="eyebrow">Kleine Kugel, großes Glück</span>
-        <h1>Ein Löffel<br>voll <em>Sommer.</em></h1>
+        <h1><span class="headline-line">Ein Löffel</span><span class="headline-line">voll <em>Sommer.</em></span></h1>
         <p class="hero-copy">Für Sonnenstrahlen im Gesicht, klebrige Finger und diesen einen Moment, in dem die Welt einfach richtig gut schmeckt.</p>
         <div class="hero-actions">
           <a class="button" href="#sorten">Unsere Sorten entdecken <span>↗</span></a>
@@ -186,7 +201,13 @@
         </div>
       </div>
       <div class="hero-art">
-        <div class="poster-frame"><img src="assets/poster-eiscreme.png" alt="Das originale Eiscreme-Poster als Key Visual der Website"></div>
+        <div class="poster-frame">
+          <img
+            src="./assets/poster-eiscreme.png"
+            alt="Das originale Eiscreme-Poster als Key Visual der Website"
+            onerror="this.onerror=null; this.src='poster-eiscreme.png';"
+          >
+        </div>
         <div class="sticker">100 %<br>GUTE<br>LAUNE ✳</div>
         <div class="sparkle" aria-hidden="true">✳</div>
       </div>
